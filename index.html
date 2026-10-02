@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Pulse Music</title>
+    <meta
+      name="description"
+      content="Pulse Music - a premium music player with playlist creation and smooth playback controls."
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="bg-orb orb-one"></div>
+    <div class="bg-orb orb-two"></div>
+
+    <div class="app-shell">
+      <section class="player-panel">
+        <header class="topbar">
+          <div class="brand-wrap">
+            <div class="brand-badge">P</div>
+            <div>
+              <p class="brand-label">Live Sessions</p>
+              <h2>Pulse Music</h2>
+            </div>
+          </div>
+
+          <button class="icon-button" id="themeButton" aria-label="Theme toggle">
+            <span>◐</span>
+          </button>
+        </header>
+
+        <main class="player-content">
+          <div class="cover-section">
+            <div class="album-art-frame">
+              <img id="albumArt" alt="Album art" />
+              <div id="artFallback" class="art-fallback" aria-live="polite">P</div>
+
+              <div class="equalizer" id="equalizer" aria-hidden="true">
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+              </div>
+            </div>
+          </div>
+
+          <div class="track-info">
+            <p class="eyebrow">Now Playing</p>
+            <h1 id="songTitle">Loading track...</h1>
+            <p id="songArtist" class="artist-name">Artist</p>
+            <p id="songAlbum" class="album-name">Album</p>
+          </div>
+
+          <div class="progress-wrapper">
+            <div class="time-row">
+              <span id="currentTime">0:00</span>
+              <span id="totalTime">0:00</span>
+            </div>
+            <input id="progressBar" type="range" min="0" max="100" value="0" />
+          </div>
+
+          <div class="control-row">
+            <button class="control-button" id="shuffleButton" aria-label="Shuffle">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M16 3h5v5h-2V6.41l-3.29 3.3-1.42-1.42L17.59 5H16V3ZM3 7h5v2H5.41l3.29 3.29-1.42 1.42L4 10.41V13H2V7h1Zm13 10h2.59l-3.29-3.29 1.42-1.42L19 16.59V15h2v5h-5v-2ZM4 17h2v2H3v-5h2v3Z"/></svg>
+            </button>
+
+            <button class="control-button" id="prevButton" aria-label="Previous song">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 5h2v14H6zm3.5 7 9 7V5z"/></svg>
+            </button>
+
+            <button class="play-button" id="playPauseButton" aria-label="Play or pause">
+              <svg id="playPauseIcon" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>
+            </button>
+
+            <button class="control-button" id="nextButton" aria-label="Next song">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M16 5h2v14h-2zm-9.5 7 9 7V5z"/></svg>
+            </button>
+
+            <button class="control-button" id="repeatButton" aria-label="Repeat mode">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 7h10a3 3 0 0 1 3 3v1h-2v-1a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1v6a1 1 0 0 0 1 1h10a1 1 0 0 0 1-1v-1h2v1a3 3 0 0 1-3 3H7a3 3 0 0 1-3-3V10a3 3 0 0 1 3-3Zm2 5h6v2H9zm0-5V4l-3 3 3 3Z"/></svg>
+            </button>
+          </div>
+
+          <div class="utility-row">
+            <button class="toggle-button" id="autoplayButton" aria-label="Autoplay">
+              <span class="toggle-label">Autoplay</span>
+              <span class="toggle-indicator"></span>
+            </button>
+
+            <div class="volume-area">
+              <button class="volume-button" id="muteButton" aria-label="Mute or unmute">
+                <svg id="volumeIcon" viewBox="0 0 24 24" aria-hidden="true"><path d="M14 3.23v17.54a1 1 0 0 1-1.62.78L7.5 17H3a1 1 0 0 1-1-1v-6a1 1 0 0 1 1-1h4.5l4.88-4.55A1 1 0 0 1 14 3.23Zm2.5 6.27 1.5-1.5 1.5 1.5 1.5-1.5 1.5 1.5-1.5 1.5 1.5 1.5-1.5 1.5-1.5-1.5-1.5 1.5-1.5-1.5 1.5-1.5-1.5-1.5 1.5-1.5Zm3.5 1.5h2v2h-2v-2Z"/></svg>
+              </button>
+              <input id="volumeBar" type="range" min="0" max="1" step="0.01" value="0.7" />
+            </div>
+          </div>
+
+          <div id="statusMessage" class="status-message" aria-live="polite">
+            Ready to play.
+          </div>
+        </main>
+      </section>
+
+      <aside class="sidebar-panel">
+        <div class="sidebar-card playlist-builder">
+          <div class="section-heading">
+            <div>
+              <p class="eyebrow">Library</p>
+              <h3>Playlists</h3>
+            </div>
+            <span class="count-pill" id="playlistCount">0</span>
+          </div>
+
+          <div class="playlist-form-row">
+            <input id="playlistNameInput" type="text" placeholder="Create new playlist" maxlength="25" />
+            <button id="createPlaylistBtn">Add</button>
+          </div>
+
+          <select id="playlistSelect" aria-label="Select playlist"></select>
+          <button id="addCurrentSongBtn" class="secondary-btn">Add current song to playlist</button>
+        </div>
+
+        <div class="sidebar-card">
+          <div class="section-heading">
+            <div>
+              <p class="eyebrow">Queue</p>
+              <h3 id="activePlaylistName">My Favorites</h3>
+            </div>
+          </div>
+
+          <ul id="playlist" class="playlist"></ul>
+        </div>
+
+        <div class="sidebar-card">
+          <div class="section-heading">
+            <div>
+              <p class="eyebrow">Discover</p>
+              <h3>Song Library</h3>
+            </div>
+          </div>
+
+          <ul id="songLibrary" class="song-library"></ul>
+        </div>
+      </aside>
+    </div>
+
+    <audio id="audioPlayer" preload="metadata"></audio>
+
+    <script src="script.js"></script>
+  </body>
+</html>
